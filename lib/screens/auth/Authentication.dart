@@ -4,6 +4,79 @@ import 'package:messenger/screens/auth/IntroScreen.dart';
 
 /*checking the authenticated users
 * redirecting between screens */
+Widget TitleLarge(String text) => Container(
+      width: 220,
+      child: Text(
+        text ?? "Unknown Text",
+        style: TextStyle(
+            fontSize: 80.0, fontWeight: FontWeight.bold, color: Black),
+      ),
+    );
+
+Widget InputForms(String placholder, String label) => Container(
+      padding: EdgeInsets.symmetric(vertical: 10),
+      child: TextField(
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: label,
+          hintText: placholder,
+        ),
+      ),
+    );
+
+Widget GoogleSignButton() => Container(
+      padding: EdgeInsets.symmetric(vertical: 5),
+      child: RaisedButton(
+        color: Colors.white,
+        elevation: 1,
+        onPressed: () {},
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        highlightElevation: 0,
+        child: Padding(
+          padding: EdgeInsets.all(12),
+          child: Row(
+            children: <Widget>[
+              Image(
+                  image: AssetImage('assets/icons/socialAuth/google.png'),
+                  height: 35.0),
+              SizedBox(
+                width: 30,
+              ),
+              Text(
+                'Sign in with Google',
+                style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                  color: Colors.grey,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+
+Widget Button(String text) => Container(
+    padding: EdgeInsets.symmetric(vertical: 5),
+    width: double.infinity,
+    child: RaisedButton(
+      color: Blue,
+      elevation: 2,
+      onPressed: () {},
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      highlightElevation: 0,
+      child: Padding(
+        padding: EdgeInsets.all(15),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ));
+
 class Authentication extends StatefulWidget {
   @override
   _AuthenticationState createState() => _AuthenticationState();
@@ -13,140 +86,47 @@ class _AuthenticationState extends State<Authentication> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         body: SafeArea(
-      child: Column(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(5),
-            child: Stack(
+            child: Padding(
+          padding: EdgeInsets.all(25),
+          child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.fromLTRB(35.0, 70.0, 0.0, 0.0),
-                  child: Text(                                                  
-                    "Hello",
-                    style: TextStyle(
-                        fontSize: 80.0,
-                        fontWeight: FontWeight.bold,
-                        color: Black),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(5.0, 50.0, 0.0, 0.0),
+                Expanded(
+                    child: Container(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Image(
-                          height: 280,
-                          image: AssetImage("assets/images/Logo.png"))
+                    children: [
+                      Row(
+                        children: [
+                          Column(
+                            children: <Widget>[
+                              TitleLarge("Hello"),
+                              TitleLarge("Emoti"),
+                            ],
+                          ),
+                        ],
+                      ),
                     ],
                   ),
-                ),
-                Container(
-                    padding: EdgeInsets.fromLTRB(35.0, 280.0, 35.0, 0.0),
+                )),
+                Expanded(
                     child: Column(
-                      children: [
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Email',
-                            hintText: 'Please Input Your Email',
-                          ),
-                          autofocus: false,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: 20, bottom: 20),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Passwords',
-                              hintText: 'Please type your password',
-                            ),
-                            autofocus: false,
-                          ),
-                        )
-                      ],
-                    ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(0.0, 580.0, 0.0, 0.0),
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  width: double.infinity,
-                  child:Container(
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                          padding: const EdgeInsets.all(5.0),
-                          child: RaisedButton(
-                            color: Colors.white,
-                            elevation: 0.5,
-                            onPressed: () {},
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            highlightElevation: 0,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Image(image: AssetImage('assets/icons/socialAuth/google.png'), height: 35.0),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      'Sign in with Google',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),),
-                        ),
-                      ),
-                    ),
-                  )
-                  ),
-                Container(
-                    padding: EdgeInsets.fromLTRB(0.0, 650.0, 0.0, 0.0),
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    width: double.infinity,
-                    child:Container(
-                      child: Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(5.0),
-                            child: RaisedButton(
-                              color: Blue,
-                              elevation: 0.5,
-                              onPressed: () {},
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                              highlightElevation: 0,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(7),
-                                  child: Text(
-                                    'Sign in',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                )
-                              ),),
-                          ),
-                        ),
-                      ),
-                    )
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    ));
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    InputForms("Please Input Your Name", "Email"),
+                    InputForms("Please Input Your Password", "Password")
+                  ],
+                )),
+                Expanded(
+                    child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[GoogleSignButton(), Button("Login")],
+                ))
+              ]),
+        )));
   }
 }
