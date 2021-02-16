@@ -1,0 +1,2 @@
+Learn flutter layout and redesign properly the login page.
+learn flutter animations and apply them here

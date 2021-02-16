@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "697515945730",
+    "project_id": "messenger-57dd9",
+    "storage_bucket": "messenger-57dd9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697515945730:android:63305c698160635aa81c1b",
+        "android_client_info": {
+          "package_name": "com.kurmanbek.messenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697515945730-p7riib3lrn2jg335l7njn17baiol00sd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDyI5Oqn6GBRpNsTyBr3tWExRnU8vzKfI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697515945730-p7riib3lrn2jg335l7njn17baiol00sd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
