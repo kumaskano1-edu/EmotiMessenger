@@ -5,6 +5,7 @@ import 'package:messenger/screens/auth/IntroScreen.dart';
 /*checking the authenticated users
 * redirecting between screens */
 Widget TitleLarge(String text) => Container(
+  height: 80,
       width: 220,
       child: Text(
         text ?? "Unknown Text",
@@ -12,7 +13,13 @@ Widget TitleLarge(String text) => Container(
             fontSize: 80.0, fontWeight: FontWeight.bold, color: Black),
       ),
     );
-
+Widget ImageLogo(logo) => Container(
+  width: 220,
+  child: Image(
+    height: 70,
+    image: AssetImage("assets/images/LogoMain.png")
+  )
+);
 Widget InputForms(String placholder, String label) => Container(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: TextField(
@@ -104,7 +111,7 @@ class _AuthenticationState extends State<Authentication> {
                           Column(
                             children: <Widget>[
                               TitleLarge("Hello"),
-                              TitleLarge("Emoti"),
+                              ImageLogo(null),
                             ],
                           ),
                         ],
