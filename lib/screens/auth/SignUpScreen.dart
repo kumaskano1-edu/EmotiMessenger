@@ -41,6 +41,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Expanded(
+                      flex: 3,
                         child: Container(
                           child: Column(
                             children: [
@@ -58,6 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         )),
                     Expanded(
+                    flex: 3,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
@@ -66,8 +68,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             FlatInputField(label: "Retype Password", placeholder: "Please Retype Password",),
 
                           ],
-                        )),
+                        ),),
                     Expanded(
+                          flex: 1,
+                      child: Container(
+                        margin: EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Already have an account?"),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(context, '/login');
+                                },
+                                child: Text(" Login", style: TextStyle(color: Blue, fontSize: 15),))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.end,

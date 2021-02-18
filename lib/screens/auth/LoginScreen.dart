@@ -14,12 +14,10 @@ Widget TitleLarge(String text) => Container(
             fontSize: 80.0, fontWeight: FontWeight.bold, color: Black),
       ),
     );
+
 Widget ImageLogo(logo) => Container(
-  child: Image(
-    height: 70,
-    image: AssetImage("assets/images/LogoMain.png")
-  )
-);
+    child: Image(height: 70, image: AssetImage("assets/images/LogoMain.png")));
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -39,6 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Expanded(
+                  flex: 3,
                     child: Container(
                   child: Column(
                     children: [
@@ -57,18 +56,47 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 )),
                 Expanded(
+                  flex: 2,
                     child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    FlatInputField(label: "Email", placeholder: "Please Input Email",),
-                    FlatInputField(label: "Password", placeholder: "Please Type Password",),
+                    FlatInputField(
+                      label: "Email",
+                      placeholder: "Please Input Email",
+                    ),
+                    FlatInputField(
+                      label: "Password",
+                      placeholder: "Please Type Password",
+                    ),
                   ],
                 )),
                 Expanded(
+                  flex: 1,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Dont have an account?"),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacementNamed(context, '/register');
+                            },
+                            child: Text(" Register", style: TextStyle(color: Blue, fontSize: 15),))
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
                     child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[GoogleSignIn(), PrimaryButton(text: "Login")],                ))
+                  children: <Widget>[
+                    GoogleSignIn(),
+                    PrimaryButton(text: "Login")
+                  ],
+                ))
               ]),
         )));
   }
