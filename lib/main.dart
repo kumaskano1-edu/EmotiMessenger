@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
 import 'package:messenger/screens/Dashboard.dart';
-import 'package:messenger/screens/auth/Authentication.dart';
-import 'package:messenger/screens/auth/DefaultScreenAuth.dart';
+import 'package:messenger/screens/auth/LoginScreen.dart';
+import 'package:messenger/screens/auth/SignUpScreen.dart';
 
 
 void main() {
@@ -15,14 +15,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/authentication',
+      initialRoute: '/login',
       theme: ThemeData(
         primaryColor: Blue,
         scaffoldBackgroundColor: White
       ),
       routes: {
-        '/authentication': (context) =>  Authentication(),
-        '/dashboard': (context) => Dashboard()
+        '/login': (context) =>  LoginScreen(),
+        '/dashboard': (context) => Dashboard(),
+        '/register': (context) => SignUpScreen()
       },
     );
   }
