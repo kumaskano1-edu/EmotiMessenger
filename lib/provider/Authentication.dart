@@ -5,10 +5,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
 
+String studentID;
 String name;
 String email;
 String imageUrl;
 
+//TODO: Somehow get userID, userEmail or anything to serve as the primaryID
 Future<String> signInWithGoogle() async {
   await Firebase.initializeApp();
 
@@ -26,13 +28,14 @@ Future<String> signInWithGoogle() async {
   if (user != null) {
     assert(!user.isAnonymous);
     assert(await user.getIdToken() != null);
+    assert(user.uid != null);
     assert(user.email != null);
     assert(user.displayName != null);
     assert(user.photoURL != null);
 
     final User currentUser = _auth.currentUser;
     assert(user.uid == currentUser.uid);
-
+    studentID = user.uid;
     name = user.displayName;
     email = user.email;
     imageUrl = user.photoURL;

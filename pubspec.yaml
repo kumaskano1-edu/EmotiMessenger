@@ -32,6 +32,8 @@ dependencies:
   firebase_core: ^0.7.0
   firebase_auth: ^0.20.0+1
   google_sign_in: ^4.5.3
+  ant_icons: ^1.0.0
+  cupertino_tabbar: ^1.1.1
 
 
 dev_dependencies:
