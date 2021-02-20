@@ -91,7 +91,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[GoogleSignIn(), PrimaryButton(text: "Register")],
+                          children: <Widget>[GoogleSignInButton(), PrimaryButton(text: "Register")],
                         ))
                   ]),
             )));

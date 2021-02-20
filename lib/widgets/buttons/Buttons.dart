@@ -30,7 +30,7 @@ class PrimaryButton extends StatelessWidget {
         ));;
   }
 }
-class GoogleSignIn extends StatelessWidget {
+class GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

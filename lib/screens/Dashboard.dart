@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/provider/Authentication.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -8,6 +9,16 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [
+            Text(
+              name
+            )
+          ],
+        ),
+      )
+    );
   }
 }

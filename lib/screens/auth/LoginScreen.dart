@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
+import 'package:messenger/provider/Authentication.dart';
 import 'package:messenger/screens/auth/IntroScreen.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
 import 'package:messenger/widgets/interaction/Inputs.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 /*checking the authenticated users
 * redirecting between screens */
@@ -18,12 +20,16 @@ Widget TitleLarge(String text) => Container(
 Widget ImageLogo(logo) => Container(
     child: Image(height: 70, image: AssetImage("assets/images/LogoMain.png")));
 
+
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _auth = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +99,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    GoogleSignIn(),
+                    RaisedButton(
+                      onPressed: () {
+                        signInWithGoogle().then((result) {
+                          if (result != null) {
+                            Navigator.of(context).pushNamed('/dashboard');
+                          }
+                        });
+                      },
+                    ),
                     PrimaryButton(text: "Login")
                   ],
                 ))

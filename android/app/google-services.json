@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "697515945730-51nidvnospgva5pdo00rh6pqrc89qo1f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kurmanbek.messenger",
+            "certificate_hash": "bcd1be64af720f96dc529760b85bbae56acb4c80"
+          }
+        },
+        {
           "client_id": "697515945730-p7riib3lrn2jg335l7njn17baiol00sd.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,14 @@
             {
               "client_id": "697515945730-p7riib3lrn2jg335l7njn17baiol00sd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "697515945730-at75pc0ell6pje2mhums7f35u9p43udp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kurmanbek.messenger",
+                "app_store_id": "123456789"
+              }
             }
           ]
         }
