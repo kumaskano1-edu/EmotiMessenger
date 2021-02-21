@@ -16,9 +16,9 @@ class _HeaderTabsState extends State<HeaderTabs> {
           groupValue: segmentedControlValue,
           backgroundColor: Colors.blue.shade200,
           children: const <int, Widget>{
-            0: Text('One'),
-            1: Text('Two'),
-            2: Text('Three')
+            0: Text('Chats'),
+            1: Text('Calls'),
+            2: Text('Profile')
           },
           onValueChanged: (value) {
             setState(() {
