@@ -99,15 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    RaisedButton(
-                      onPressed: () {
-                        signInWithGoogle().then((result) {
-                          if (result != null) {
-                            Navigator.of(context).pushNamed('/dashboard');
-                          }
-                        });
-                      },
-                    ),
+                    GoogleSignInButton(),
                     PrimaryButton(text: "Login")
                   ],
                 ))

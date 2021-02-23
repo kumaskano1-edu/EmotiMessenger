@@ -11,6 +11,7 @@ String email;
 String imageUrl;
 
 //TODO: Somehow get userID, userEmail or anything to serve as the primaryID
+//TODO: Avatar from social plugin must be caught and used as the tool
 Future<String> signInWithGoogle() async {
   await Firebase.initializeApp();
 

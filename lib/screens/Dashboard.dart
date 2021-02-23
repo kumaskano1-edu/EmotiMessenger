@@ -23,25 +23,29 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
           child: Column( //Main Column
             children: [
-              Row( // the Avatar + Search
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.brown.shade800,
-                    child: Text('AH'),
-                  ),
-                  Icon(
-                    AntIcons.search_outline,
-                    size: 50,
-                  ),
-                ],
-              ),
-              HeaderTabs(),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Row( // the Avatar + Search
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.brown.shade800,
+                      child: Text('AH'),
+                    ),
+                    Icon(
+                      AntIcons.search_outline,
+                      size: 25,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                  padding: EdgeInsets.only(top: 25, bottom: 10, left: 20, right: 20),
+                  child: HeaderTabs()),
+              Container(
                 child: Column(
                   children: [
                       ChatTile(ContactAvatar: "K", ContactName: "Kurmanbek",

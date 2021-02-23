@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/provider/Authentication.dart';
 
 import '../../constants.dart';
 
@@ -36,9 +37,15 @@ class GoogleSignInButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5),
       child: RaisedButton(
+        onPressed: () {
+          signInWithGoogle().then((result) {
+            if (result != null) {
+              Navigator.of(context).pushNamed('/dashboard');
+            }
+          });
+        },
         color: Colors.white,
         elevation: 1,
-        onPressed: () {},
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         highlightElevation: 0,
         child: Padding(
