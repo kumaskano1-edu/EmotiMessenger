@@ -13,6 +13,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
+    AuthenticationProvider authProvider = new AuthenticationProvider();
     return Scaffold(
       floatingActionButton: Container(
         height: 120.0,
@@ -33,7 +34,15 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     CircleAvatar(
                       backgroundColor: Colors.brown.shade800,
-                      child: Text('AH'),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                            image: new DecorationImage(
+                                fit: BoxFit.fill,
+                                image: new NetworkImage(
+                                    authProvider.imageUrl.toString())
+                            )),
+                      ),
                     ),
                     Icon(
                       AntIcons.search_outline,

@@ -32,13 +32,14 @@ class PrimaryButton extends StatelessWidget {
   }
 }
 class GoogleSignInButton extends StatelessWidget {
+  AuthenticationProvider authProvider = new AuthenticationProvider();
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5),
       child: RaisedButton(
         onPressed: () {
-          signInWithGoogle().then((result) {
+          authProvider.signInWithGoogle().then((result) {
             if (result != null) {
               Navigator.of(context).pushNamed('/dashboard');
             }

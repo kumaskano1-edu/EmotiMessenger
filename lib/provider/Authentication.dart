@@ -2,59 +2,89 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-final FirebaseAuth _auth = FirebaseAuth.instance;
-final GoogleSignIn googleSignIn = GoogleSignIn();
+class AuthenticationProvider {
 
-String studentID;
-String name;
-String email;
-String imageUrl;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  String studentID;
+  String name;
+  String email;
+  String imageUrl;
 
 //TODO: Somehow get userID, userEmail or anything to serve as the primaryID
-//TODO: Avatar from social plugin must be caught and used as the tool
-Future<String> signInWithGoogle() async {
-  await Firebase.initializeApp();
 
-  final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-  final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-
-  final AuthCredential credential = GoogleAuthProvider.credential(
-    accessToken: googleSignInAuthentication.accessToken,
-    idToken: googleSignInAuthentication.idToken,
-  );
-
-  final UserCredential authResult = await _auth.signInWithCredential(credential);
-  final User user = authResult.user;
-
-  if (user != null) {
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
-    assert(user.uid != null);
-    assert(user.email != null);
-    assert(user.displayName != null);
-    assert(user.photoURL != null);
-
-    final User currentUser = _auth.currentUser;
-    assert(user.uid == currentUser.uid);
-    studentID = user.uid;
-    name = user.displayName;
-    email = user.email;
-    imageUrl = user.photoURL;
-
-    if (name.contains(" ")) {
-      name = name.substring(0, name.indexOf(" "));
+  Future<String> SignIn({String email, String password}) async {
+    try {
+      UserCredential authResult = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+      final User user = authResult.user;
+      SetUser(user);
+      return "User Authenticated";
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      } else {
+        print('Other Authentication Problem');
+      }
     }
-
-    print('signInWithGoogle succeeded: $user');
-
-    return '$user';
   }
 
-  return null;
-}
+  Future<bool> SetUser(User user) async {
+    if (user != null) {
+      assert(!user.isAnonymous);
+      assert(await user.getIdToken() != null);
+      assert(user.uid != null);
+      assert(user.email != null);
+      assert(user.displayName != null);
+      assert(user.photoURL != null);
 
-Future<void> signOutGoogle() async {
-  await googleSignIn.signOut();
+      studentID = user.uid;
+      name = user.displayName;
+      email = user.email;
+      imageUrl = user.photoURL;
 
-  print("User Signed Out");
+      if (name.contains(" ")) {
+        name = name.substring(0, name.indexOf(" "));
+      }
+      return true;
+    }
+    return false;
+  }
+
+  Future<String> signInWithGoogle() async {
+    await Firebase.initializeApp();
+
+    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount
+        .authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final UserCredential authResult = await _auth.signInWithCredential(
+        credential);
+    final User user = authResult.user;
+    try {
+      await SetUser(user);
+      return "Signed in With Google";
+    } catch (e) {
+      return e;
+    }
+    return null;
+  }
+
+  Future<void> signOutGoogle() async {
+    await googleSignIn.signOut();
+
+    print("User Signed Out");
+  }
+
 }
