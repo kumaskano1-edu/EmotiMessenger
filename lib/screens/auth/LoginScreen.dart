@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
 import 'package:messenger/provider/Authentication.dart';
-import 'package:messenger/screens/auth/IntroScreen.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
 import 'package:messenger/widgets/interaction/Inputs.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 /*checking the authenticated users
 * redirecting between screens */
@@ -29,6 +27,15 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _auth = false;
+  final EmailController = TextEditingController();
+  final PasswordController = TextEditingController();
+  AuthenticationProvider authGlobal = new AuthenticationProvider();
+  @override
+  void dispose() {
+    EmailController.dispose();
+    PasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +76,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     FlatInputField(
                       label: "Email",
                       placeholder: "Please Input Email",
+                      editingController: EmailController,
                     ),
                     FlatInputField(
                       label: "Password",
                       placeholder: "Please Type Password",
+                      editingController: PasswordController,
                     ),
                   ],
                 )),
@@ -100,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     GoogleSignInButton(),
-                    PrimaryButton(text: "Login")
+                    PrimaryButton(text: "Login",)
                   ],
                 ))
               ]),

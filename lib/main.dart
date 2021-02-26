@@ -9,6 +9,7 @@ import 'package:messenger/screens/errors/Error404.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -17,31 +18,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    String InitialRoute = "/loading'";
     return FutureBuilder(
       // Initialize FlutterFire:
       future: Initialization,
       builder: (context, snapshot) {
           if(snapshot.connectionState == ConnectionState.done) {
-            InitialRoute = "/login";
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              initialRoute: '/login',
+              home: Dashboard(),
+              theme: ThemeData(
+                  primaryColor: Blue,
+                  scaffoldBackgroundColor: White
+              ),
+              routes: {
+                '/error404': (context) => Error404(),
+                '/login': (context) =>  LoginScreen(),
+                '/dashboard': (context) => Dashboard(),
+                '/register': (context) => SignUpScreen()
+              },
+            );
           } else if(snapshot.hasError) {
-            InitialRoute = "/error404";
+              return Error404();
           }
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            initialRoute: '/loading',
-            theme: ThemeData(
-                primaryColor: Blue,
-                scaffoldBackgroundColor: White
-            ),
-            routes: {
-              '/loading': (context) => LoadingScreen(),
-              '/error404': (context) => Error404(),
-              '/login': (context) =>  LoginScreen(),
-              '/dashboard': (context) => Dashboard(),
-              '/register': (context) => SignUpScreen()
-            },
-          );
+          return LoadingScreen();
         }
     );
   }

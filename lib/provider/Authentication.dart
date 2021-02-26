@@ -14,7 +14,7 @@ class AuthenticationProvider {
 
 //TODO: Somehow get userID, userEmail or anything to serve as the primaryID
 
-  Future<String> SignIn({String email, String password}) async {
+  Future<String> SignInWithCredentials(String email, String password) async {
     try {
       UserCredential authResult = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
