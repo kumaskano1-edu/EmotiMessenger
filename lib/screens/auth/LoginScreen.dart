@@ -109,7 +109,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     GoogleSignInButton(),
-                    PrimaryButton(text: "Login",)
+                    PrimaryButton(text: "Login", onPressed: () async {
+                      if(await authGlobal.SignInWithCredentials(EmailController.text, PasswordController.text) == true) {
+                        Navigator.pushNamed(context, '/dashboard');
+                      };
+                    },)
                   ],
                 ))
               ]),

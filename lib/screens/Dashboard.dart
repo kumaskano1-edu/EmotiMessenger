@@ -9,7 +9,7 @@ class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
 }
-
+//TODO: Add an ability to show avatar, if user has a photo and if user does not have it
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {

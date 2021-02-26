@@ -12,9 +12,10 @@ class AuthenticationProvider {
   String email;
   String imageUrl;
 
-//TODO: Somehow get userID, userEmail or anything to serve as the primaryID
+//TODO: Output Authentication errors in the login screen
+//Todo: Implement Registration
 
-  Future<String> SignInWithCredentials(String email, String password) async {
+  Future<bool> SignInWithCredentials(String email, String password) async {
     try {
       UserCredential authResult = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
@@ -22,9 +23,13 @@ class AuthenticationProvider {
           password: password
       );
       final User user = authResult.user;
-      SetUser(user);
-      return "User Authenticated";
-    } on FirebaseAuthException catch (e) {
+      if(await SetUser(user) == true)
+        return true;
+      else {
+        print("problems with seting the user");
+        return false;
+      }
+     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
@@ -32,22 +37,23 @@ class AuthenticationProvider {
       } else {
         print('Other Authentication Problem');
       }
+      return false;
     }
+    return false;
   }
 
   Future<bool> SetUser(User user) async {
+    String displayedName, photoUrl;
     if (user != null) {
-      assert(!user.isAnonymous);
       assert(await user.getIdToken() != null);
       assert(user.uid != null);
       assert(user.email != null);
-      assert(user.displayName != null);
-      assert(user.photoURL != null);
-
+      displayedName = user.displayName != null ? user.displayName : "unknown person";
+      photoUrl = user.photoURL != null ? user.photoURL : displayedName[0];
       studentID = user.uid;
-      name = user.displayName;
+      name = displayedName;
       email = user.email;
-      imageUrl = user.photoURL;
+      imageUrl = photoUrl;
 
       if (name.contains(" ")) {
         name = name.substring(0, name.indexOf(" "));

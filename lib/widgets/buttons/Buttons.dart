@@ -5,10 +5,9 @@ import '../../constants.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
-  final Function action;
+  final GestureTapCallback onPressed;
 
-
-  PrimaryButton({this.text, this.action});
+  PrimaryButton({this.text, this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,7 +16,7 @@ class PrimaryButton extends StatelessWidget {
         child: RaisedButton(
           color: Blue,
           elevation: 2,
-          onPressed: action,
+          onPressed: onPressed,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
           highlightElevation: 0,
           child: Padding(
