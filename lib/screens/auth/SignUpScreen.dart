@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
+import 'package:messenger/provider/Authentication.dart';
 import 'package:messenger/screens/auth/IntroScreen.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
 import 'package:messenger/widgets/interaction/Inputs.dart';
@@ -28,6 +29,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final EmailController = TextEditingController();
+  final PasswordController = TextEditingController();
+  final Password2Controller = TextEditingController();
+  AuthenticationProvider authGlobal = new AuthenticationProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,9 +68,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            FlatInputField(label: "Email", placeholder: "Please Input Email",),
-                            FlatInputField(label: "Password", placeholder: "Please Type Password",),
-                            FlatInputField(label: "Retype Password", placeholder: "Please Retype Password",),
+                            FlatInputField(label: "Email", editingController: EmailController, placeholder: "Please Input Email",),
+                            FlatInputField(label: "Password", editingController: PasswordController, placeholder: "Please Type Password",),
+                            FlatInputField(label: "Retype Password", editingController: Password2Controller, placeholder: "Please Retype Password",),
 
                           ],
                         ),),
@@ -91,7 +96,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[GoogleSignInButton(), PrimaryButton(text: "Register")],
+                          children: <Widget>[GoogleSignInButton(),
+                            PrimaryButton(text: "Register", onPressed: () async {
+                              if(await authGlobal.SignUpWithCredentials(EmailController.text, PasswordController.text, Password2Controller.text) == true) {
+                                Navigator.pushNamed(context, '/dashboard');
+                              };
+                            },)
+                          ],
                         ))
                   ]),
             )));

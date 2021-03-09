@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationProvider {
@@ -11,10 +12,21 @@ class AuthenticationProvider {
   String name;
   String email;
   String imageUrl;
-
-//TODO: Output Authentication errors in the login screen
-//Todo: Implement Registration
-
+//TODO: Learn to State Manage User all around the application, using the scoped model library
+//TODO: Retyping Passord Validation, Error Output in the Login Screen, Sign Out Button
+  Future<bool> SignUpWithCredentials(String email, String password, String password2) async {
+    try {
+      UserCredential authResult = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      final User user = authResult.user;
+      if(await SetUser(user) == true) {
+        return true;
+      }
+    } on Exception catch(e) {
+      print(e);
+    }
+    return false;
+  }
   Future<bool> SignInWithCredentials(String email, String password) async {
     try {
       UserCredential authResult = await FirebaseAuth.instance
@@ -48,7 +60,7 @@ class AuthenticationProvider {
       assert(await user.getIdToken() != null);
       assert(user.uid != null);
       assert(user.email != null);
-      displayedName = user.displayName != null ? user.displayName : "unknown person";
+      displayedName = user.displayName != null ? user.displayName : "Unknown";
       photoUrl = user.photoURL != null ? user.photoURL : displayedName[0];
       studentID = user.uid;
       name = displayedName;
@@ -80,17 +92,20 @@ class AuthenticationProvider {
     final User user = authResult.user;
     try {
       await SetUser(user);
-      return "Signed in With Google";
     } catch (e) {
       return e;
     }
     return null;
   }
 
-  Future<void> signOutGoogle() async {
-    await googleSignIn.signOut();
-
-    print("User Signed Out");
+  Future<bool> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      return true;
+    } on Exception catch(e) {
+      print(e);
+    }
+    return false;
   }
 
 }
