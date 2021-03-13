@@ -22,10 +22,9 @@ Future<User> SignUpWithCredentials(String name, String email, String password) a
     await user.updateProfile(displayName: name);
     await user.reload();
     return user;
-  } on Exception catch(e) {
-    print(e);
+  } on FirebaseAuthException catch(e) {
+    throw Exception(e.message);
   }
-  return null;
 }
 
 Future<User> SignInWithCredentials(String email, String password) async {

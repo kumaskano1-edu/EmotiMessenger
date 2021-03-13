@@ -4,6 +4,7 @@ import 'package:messenger/provider/Authentication.dart';
 import 'package:messenger/screens/auth/IntroScreen.dart';
 import 'package:messenger/state/User.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
+import 'package:messenger/widgets/decorations/callouts.dart';
 import 'package:messenger/widgets/interaction/Inputs.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -25,6 +26,11 @@ Widget ImageLogo(logo) => Container(
     )
 );
 class SignUpScreen extends StatefulWidget {
+  String msg = "";
+
+  SignUpScreen() {
+    this.msg = "";
+  }
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -109,6 +115,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                   ),
                                 ),
+                                if(!widget.msg.isEmpty) Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 7),
+                                    child: Callout(message: widget.msg, mainColor: LightPink, textColor: DarkRed,)
+                                )
                               ],
                             ),),
                           Expanded(
@@ -134,17 +144,35 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: <Widget>[
-                                  GoogleSignInButton(),
-                                  PrimaryButton(text: "Register",  onPressed: () async {
+                                  GoogleSignInButton(onPressed: () async {
+                                    var user = await signInWithGoogle();
+                                    if(user != null) {
+                                      model.setUserModel(user);
+                                      return Navigator.pushNamed(context, "/dashboard");
+                                    }
+                                  },),                                  PrimaryButton(text: "Register",  onPressed: () async {
                                     //set the model user by the result of the sign in function
-                                  if (_formKey.currentState.validate()) {
-                                      var user = await SignUpWithCredentials(NameController.text, EmailController.text, PasswordController.text);
-                                      if(user != null) {
-                                        model.setUserModel(user);
-                                        model.setName(NameController.text);
-                                        return Navigator.pushNamed(context, "/dashboard");
+                                    var user = null;
+                                    if (_formKey.currentState.validate()) {
+                                      //set the model user by the result of the sign in function
+                                      try {
+                                        user = await SignUpWithCredentials(
+                                            NameController.text,
+                                            EmailController.text,
+                                            PasswordController.text);
+                                      } on Exception catch(e) {
+                                        String Errormsg = e.toString().substring(e.toString().indexOf(" ") + 1); //removing exception word from the error msg
+                                        setState(() {
+                                          widget.msg = Errormsg;
+                                        });
+                                      } finally {
+                                        if(user != null) {
+                                          model.setUserModel(user);
+                                          model.setName(NameController.text);
+                                          return Navigator.pushNamed(context, "/dashboard");
+                                        }
                                       }
-                                  }
+                                    }
                                   },)
                                 ],
                               ))
