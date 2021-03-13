@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               if(!widget.msg.isEmpty) Padding(
                                 padding: EdgeInsets.symmetric(vertical: 7),
-                                child: Callout(message: "Wrong Account", mainColor: LightPink, textColor: DarkRed,)
+                                child: Callout(message: widget.msg, mainColor: LightPink, textColor: DarkRed,)
                               )
                             ],
                           )),
@@ -156,13 +156,24 @@ class _LoginScreenState extends State<LoginScreen> {
                               PrimaryButton(
                                 text: "Login",
                                 onPressed: () async {
-                                 if (_formKey.currentState.validate()) {
-    //set the model user by the result of the sign in function
-                                  var user = await SignInWithCredentials(EmailController.text, PasswordController.text);
-                                  if(user != null) {
-                                    model.setUserModel(user);
-                                    return Navigator.pushNamed(context, "/dashboard");
-                                  }
+                                  var user = null;
+                                  if (_formKey.currentState.validate()) {
+                                    //set the model user by the result of the sign in function
+                                     try {
+                                       user = await SignInWithCredentials(
+                                           EmailController.text,
+                                           PasswordController.text);
+                                     } on Exception catch(e) {
+                                      String Errormsg = e.toString().substring(e.toString().indexOf(" ") + 1); //removing exception word from the error msg
+                                       setState(() {
+                                         widget.msg = Errormsg;
+                                       });
+                                     } finally {
+                                       if(user != null) {
+                                         model.setUserModel(user);
+                                         return Navigator.pushNamed(context, "/dashboard");
+                                       }
+                                     }
                                 }},
                               )
                             ],

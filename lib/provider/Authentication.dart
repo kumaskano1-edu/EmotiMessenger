@@ -38,14 +38,7 @@ Future<User> SignInWithCredentials(String email, String password) async {
     final User user = authResult.user;
     return user;
    } on FirebaseAuthException catch (e) {
-    if (e.code == 'user-not-found') {
-      print('No user found for that email.');
-    } else if (e.code == 'wrong-password') {
-      print('Wrong password provided for that user.');
-    } else {
-      print('Other Authentication Problem');
-    }
-    return null;
+      throw Exception(e.message);
   }
 }
 
