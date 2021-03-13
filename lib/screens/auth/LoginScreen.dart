@@ -26,6 +26,11 @@ Widget ImageLogo(logo) => Container(
     child: Image(height: 70, image: AssetImage("assets/images/LogoMain.png")));
 
 class LoginScreen extends StatefulWidget {
+  String msg = "";
+
+  LoginScreen() {
+    this.msg = "";
+  }
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -33,8 +38,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final EmailController = TextEditingController();
   final PasswordController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
+
+
 
   @override
   void dispose() {
@@ -107,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                               ),
-                              Padding(
+                              if(!widget.msg.isEmpty) Padding(
                                 padding: EdgeInsets.symmetric(vertical: 7),
                                 child: Callout(message: "Wrong Account", mainColor: LightPink, textColor: DarkRed,)
                               )
