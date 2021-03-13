@@ -96,7 +96,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   padding: EdgeInsets.symmetric(vertical: 7),
                                   child: TextFormField(
                                     controller: EmailController,
-                                    obscureText: true,
                                     validator: (value) => formCantBeEmpty(value),
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(),
@@ -108,6 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   padding: EdgeInsets.symmetric(vertical: 7),
                                   child: TextFormField(
                                     controller: PasswordController,
+                                    obscureText: true,
                                     validator: (value) => formCantBeEmpty(value),
                                     decoration: InputDecoration(
                                       border: OutlineInputBorder(),

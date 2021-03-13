@@ -23,7 +23,7 @@ Future<User> SignUpWithCredentials(String name, String email, String password) a
     await user.reload();
     return user;
   } on FirebaseAuthException catch(e) {
-    throw Exception(e.message);
+    throw Exception(e.code);
   }
 }
 
@@ -65,7 +65,6 @@ Future<bool> signOut() async {
     await FirebaseAuth.instance.signOut();
     return true;
   } on Exception catch(e) {
-    print(e);
+    throw Exception(e);
   }
-  return false;
 }
