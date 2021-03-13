@@ -1,11 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
 import 'package:messenger/provider/Authentication.dart';
+import 'package:messenger/screens/auth/helpers/validators.dart';
+import 'package:messenger/state/User.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
+import 'package:messenger/widgets/decorations/callouts.dart';
 import 'package:messenger/widgets/interaction/Inputs.dart';
-
+import 'package:scoped_model/scoped_model.dart';
+import 'package:messenger/state/User.dart';
 /*checking the authenticated users
 * redirecting between screens */
+
+//TODO Find a way to handle errors
 Widget TitleLarge(String text) => Container(
       height: 90,
       child: Text(
@@ -18,18 +25,17 @@ Widget TitleLarge(String text) => Container(
 Widget ImageLogo(logo) => Container(
     child: Image(height: 70, image: AssetImage("assets/images/LogoMain.png")));
 
-
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _auth = false;
   final EmailController = TextEditingController();
   final PasswordController = TextEditingController();
-  AuthenticationProvider authGlobal = new AuthenticationProvider();
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void dispose() {
     EmailController.dispose();
@@ -39,84 +45,126 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomPadding: false,
-        body: SafeArea(
-            child: Padding(
-          padding: EdgeInsets.all(25),
-          child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Expanded(
-                  flex: 3,
-                    child: Container(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+    return ScopedModelDescendant<UserModel>(
+      builder: (context, child, model) {
+        return Scaffold(
+            resizeToAvoidBottomPadding: false,
+            body: SafeArea(
+                child: Padding(
+              padding: EdgeInsets.all(25),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Expanded(
+                          flex: 3,
+                          child: Container(
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        TitleLarge("Sign In"),
+                                        ImageLogo(null)
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )),
+                      Expanded(
+                          flex: 3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
                             children: <Widget>[
-                              TitleLarge("Sign In"),
-                              ImageLogo(null)
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 7),
+                                child: TextFormField(
+                                  controller: EmailController,
+                                  validator: (value) => formCantBeEmpty(value),
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Email',
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 7),
+                                child: TextFormField(
+                                  controller: PasswordController,
+                                  obscureText: true,
+                                  validator: (value) => formCantBeEmpty(value),
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Password',
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 7),
+                                child: Callout(message: "Wrong Account", mainColor: LightPink, textColor: DarkRed,)
+                              )
+                            ],
+                          )),
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Dont have an account?"),
+                              GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushReplacementNamed(
+                                        context, '/register');
+                                  },
+                                  child: Text(
+                                    " Register",
+                                    style: TextStyle(color: Blue, fontSize: 15),
+                                  ))
                             ],
                           ),
-                        ],
+                        ),
                       ),
-                    ],
-                  ),
-                )),
-                Expanded(
-                  flex: 2,
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    FlatInputField(
-                      label: "Email",
-                      placeholder: "Please Input Email",
-                      editingController: EmailController,
-                    ),
-                    FlatInputField(
-                      label: "Password",
-                      placeholder: "Please Type Password",
-                      editingController: PasswordController,
-                    ),
-                  ],
-                )),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Dont have an account?"),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(context, '/register');
-                            },
-                            child: Text(" Register", style: TextStyle(color: Blue, fontSize: 15),))
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                    child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    GoogleSignInButton(),
-                    PrimaryButton(text: "Login", onPressed: () async {
-                      if(await authGlobal.SignInWithCredentials(EmailController.text, PasswordController.text) == true) {
-                        Navigator.pushNamed(context, '/dashboard');
-                      };
-                    },)
-                  ],
-                ))
-              ]),
-        )));
+                      Expanded(
+                          flex: 3,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              GoogleSignInButton(onPressed: () async {
+                                var user = await signInWithGoogle();
+                                if(user != null) {
+                                  model.setUserModel(user);
+                                  return Navigator.pushNamed(context, "/dashboard");
+                                }
+                              },),
+                              PrimaryButton(
+                                text: "Login",
+                                onPressed: () async {
+                                 if (_formKey.currentState.validate()) {
+    //set the model user by the result of the sign in function
+                                  var user = await SignInWithCredentials(EmailController.text, PasswordController.text);
+                                  if(user != null) {
+                                    model.setUserModel(user);
+                                    return Navigator.pushNamed(context, "/dashboard");
+                                  }
+                                }},
+                              )
+                            ],
+                          ))
+                    ]),
+              ),
+            )));
+      },
+    );
   }
 }

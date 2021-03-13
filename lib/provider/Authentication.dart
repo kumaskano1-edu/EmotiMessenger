@@ -3,109 +3,77 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class AuthenticationProvider {
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+//TESTING PURPOSES
+String getingCurrentUser() {
+  return _auth.currentUser.displayName;
+}
 
-  String studentID;
-  String name;
-  String email;
-  String imageUrl;
-//TODO: Learn to State Manage User all around the application, using the scoped model library
-//TODO: Retyping Passord Validation, Error Output in the Login Screen, Sign Out Button
-  Future<bool> SignUpWithCredentials(String email, String password, String password2) async {
-    try {
-      UserCredential authResult = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      final User user = authResult.user;
-      if(await SetUser(user) == true) {
-        return true;
-      }
-    } on Exception catch(e) {
-      print(e);
-    }
-    return false;
+//TODO: Error Output in the Login Screen, Sign Out Button
+//TODO: FIND A WAY TO PROPERLY LOGOUT
+Future<User> SignUpWithCredentials(String name, String email, String password) async {
+  try {
+    User user;
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password)
+    .then((result) { user = result.user;});
+
+    await user.updateProfile(displayName: name);
+    await user.reload();
+    return user;
+  } on Exception catch(e) {
+    print(e);
   }
-  Future<bool> SignInWithCredentials(String email, String password) async {
-    try {
-      UserCredential authResult = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
-      final User user = authResult.user;
-      if(await SetUser(user) == true)
-        return true;
-      else {
-        print("problems with seting the user");
-        return false;
-      }
-     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      } else {
-        print('Other Authentication Problem');
-      }
-      return false;
-    }
-    return false;
-  }
+  return null;
+}
 
-  Future<bool> SetUser(User user) async {
-    String displayedName, photoUrl;
-    if (user != null) {
-      assert(await user.getIdToken() != null);
-      assert(user.uid != null);
-      assert(user.email != null);
-      displayedName = user.displayName != null ? user.displayName : "Unknown";
-      photoUrl = user.photoURL != null ? user.photoURL : displayedName[0];
-      studentID = user.uid;
-      name = displayedName;
-      email = user.email;
-      imageUrl = photoUrl;
-
-      if (name.contains(" ")) {
-        name = name.substring(0, name.indexOf(" "));
-      }
-      return true;
-    }
-    return false;
-  }
-
-  Future<String> signInWithGoogle() async {
-    await Firebase.initializeApp();
-
-    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount
-        .authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
+Future<User> SignInWithCredentials(String email, String password) async {
+  try {
+    UserCredential authResult = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+        email: email,
+        password: password
     );
-
-    final UserCredential authResult = await _auth.signInWithCredential(
-        credential);
     final User user = authResult.user;
-    try {
-      await SetUser(user);
-    } catch (e) {
-      return e;
+    return user;
+   } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided for that user.');
+    } else {
+      print('Other Authentication Problem');
     }
     return null;
   }
+}
 
-  Future<bool> signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      return true;
-    } on Exception catch(e) {
-      print(e);
-    }
-    return false;
+
+Future<User> signInWithGoogle() async {
+  await Firebase.initializeApp();
+
+  final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+  final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount
+      .authentication;
+
+  final AuthCredential credential = GoogleAuthProvider.credential(
+    accessToken: googleSignInAuthentication.accessToken,
+    idToken: googleSignInAuthentication.idToken,
+  );
+
+  final UserCredential authResult = await _auth.signInWithCredential(
+      credential);
+  final User user = authResult.user;
+  return user;
+}
+
+Future<bool> signOut() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+    return true;
+  } on Exception catch(e) {
+    print(e);
   }
-
+  return false;
 }

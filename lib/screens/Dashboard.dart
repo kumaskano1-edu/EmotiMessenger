@@ -1,87 +1,92 @@
 import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/provider/Authentication.dart';
+import 'package:messenger/state/User.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
 import 'package:messenger/widgets/interaction/ChatTile.dart';
 import 'package:messenger/widgets/interaction/ChatTile.dart';
 import 'package:messenger/widgets/interaction/Tabs.dart';
-
+import 'package:scoped_model/scoped_model.dart';
+//TODO There is a problem with avatar picture, fix it
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
 }
-//TODO: Add an ability to show avatar, if user has a photo and if user does not have it
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: Container(
-        height: 120.0,
-        width: 60.0,
-        child: FittedBox(
-          child: FloatingActionButton(child: Icon(Icons.add, size: 40,),),
-        ),
-      ),
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-          child: Column( //Main Column
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                child: Row( // the Avatar + Search
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.brown.shade800,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                            image: new DecorationImage(
-                                fit: BoxFit.fill,
-                                image: new NetworkImage(
-                                    AuthenticationProvider.imageUrl.toString())
-                            )),
-                      ),
-                    ),
-                    Icon(
-                      AntIcons.search_outline,
-                      size: 25,
-                    ),
-                    Text(AuthenticationProvider.email)
-
-                  ],
-                ),
-              ),
-              Container(
-                  padding: EdgeInsets.only(top: 25, bottom: 10, left: 20, right: 20),
-                  child: HeaderTabs()),
-              Container(
-                child: Column(
-                  children: [
-                      ChatTile(ContactAvatar: "K", ContactName: "Kurmanbek",
-                        LastMessage: "Hey how are you doing", TimeRecieved: "1:00AM",),
-                    ChatTile(ContactAvatar: "MD", ContactName: "Kurmanbek",
-                      LastMessage: "wHATSUPP!!!", TimeRecieved: "1:00AM",),
-                    ChatTile(ContactAvatar: "KU", ContactName: "Kurmanbek",
-                      LastMessage: ":)", TimeRecieved: "1:00AM",),
-                    ChatTile(ContactAvatar: "SY", ContactName: "Kurmanbek",
-                      LastMessage: "Love you", TimeRecieved: "1:00AM",),
-                  ],
-                ),
-              ),
-              Container(
-                child: PrimaryButton(text: "Logout", onPressed: () async {
-                  if(await AuthenticationProvider.signOut()) {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-                  };
-                },),
-              )
-            ],
+    return ScopedModelDescendant<UserModel>(
+      builder: (context, child, model) {
+        return Scaffold(
+        floatingActionButton: Container(
+          height: 120.0,
+          width: 60.0,
+          child: FittedBox(
+            child: FloatingActionButton(child: Icon(Icons.add, size: 40,),),
           ),
         ),
-      )
+        body: SafeArea(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+            child: Column( //Main Column
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row( // the Avatar + Search
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.brown.shade800,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                              image: new DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: new NetworkImage(
+                                      model.imageUrl.toString())
+                              )),
+                        ),
+                      ),
+                      Icon(
+                        AntIcons.search_outline,
+                        size: 25,
+                      ),
+                      Text(model.name)
+
+                    ],
+                  ),
+                ),
+                Container(
+                    padding: EdgeInsets.only(top: 25, bottom: 10, left: 20, right: 20),
+                    child: HeaderTabs()),
+                Container(
+                  child: Column(
+                    children: [
+                        ChatTile(ContactAvatar: "K", ContactName: "Kurmanbek",
+                          LastMessage: "Hey how are you doing", TimeRecieved: "1:00AM",),
+                      ChatTile(ContactAvatar: "MD", ContactName: "Kurmanbek",
+                        LastMessage: "wHATSUPP!!!", TimeRecieved: "1:00AM",),
+                      ChatTile(ContactAvatar: "KU", ContactName: "Kurmanbek",
+                        LastMessage: ":)", TimeRecieved: "1:00AM",),
+                      ChatTile(ContactAvatar: "SY", ContactName: "Kurmanbek",
+                        LastMessage: "Love you", TimeRecieved: "1:00AM",),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: PrimaryButton(text: "Logout", onPressed: () async {
+                    if(await signOut()) {
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                    };
+                  },),
+                )
+              ],
+            ),
+          ),
+        )
+      );
+      }
     );
   }
 }

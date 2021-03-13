@@ -33,19 +33,15 @@ class PrimaryButton extends StatelessWidget {
   }
 }
 class GoogleSignInButton extends StatelessWidget {
-  AuthenticationProvider authProvider = new AuthenticationProvider();
+  final GestureTapCallback onPressed;
+
+  GoogleSignInButton({Key key, this.onPressed}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5),
       child: RaisedButton(
-        onPressed: () {
-          authProvider.signInWithGoogle().then((result) {
-            if (result != null) {
-              Navigator.of(context).pushNamed('/dashboard');
-            }
-          });
-        },
+        onPressed: onPressed,
         color: Colors.white,
         elevation: 1,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
