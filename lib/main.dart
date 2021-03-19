@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
+import 'package:messenger/screens/ProfileScreen.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:messenger/screens/Dashboard.dart';
 import 'package:messenger/screens/auth/LoginScreen.dart';
@@ -40,8 +41,10 @@ class MyApp extends StatelessWidget {
                 routes: {
                   '/error404': (context) => Error404(),
                   '/login': (context) =>  LoginScreen(),
+                  '/register': (context) => SignUpScreen(),
+                  //SCREENs
                   '/dashboard': (context) => Dashboard(),
-                  '/register': (context) => SignUpScreen()
+                  '/profile': (context) => ProfileScreen(),
                 },
               ),
             );

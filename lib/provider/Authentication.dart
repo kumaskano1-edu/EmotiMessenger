@@ -10,9 +10,6 @@ final GoogleSignIn googleSignIn = GoogleSignIn();
 String getingCurrentUser() {
   return _auth.currentUser.displayName;
 }
-
-//TODO: Error Output in the Login Screen, Sign Out Button
-//TODO: FIND A WAY TO PROPERLY LOGOUT
 Future<User> SignUpWithCredentials(String name, String email, String password) async {
   try {
     User user;

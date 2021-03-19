@@ -11,8 +11,6 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:messenger/state/User.dart';
 /*checking the authenticated users
 * redirecting between screens */
-
-//TODO Find a way to handle errors
 Widget TitleLarge(String text) => Container(
       height: 90,
       child: Text(

@@ -1,5 +1,6 @@
 import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:messenger/constants.dart';
 import 'package:messenger/provider/Authentication.dart';
 import 'package:messenger/state/User.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
@@ -7,7 +8,6 @@ import 'package:messenger/widgets/interaction/ChatTile.dart';
 import 'package:messenger/widgets/interaction/ChatTile.dart';
 import 'package:messenger/widgets/interaction/Tabs.dart';
 import 'package:scoped_model/scoped_model.dart';
-//TODO There is a problem with avatar picture, fix it
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
@@ -35,23 +35,28 @@ class _DashboardState extends State<Dashboard> {
                   child: Row( // the Avatar + Search
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.brown.shade800,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                              image: new DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: new NetworkImage(
-                                      model.imageUrl.toString())
-                              )),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/profile');
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.brown.shade800,
+                          child: model.imageUrl != null ? Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                                image: new DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: new NetworkImage(
+                                        model.imageUrl.toString())
+                                )),
+                          ): Text(model.name[0].toUpperCase()),
                         ),
                       ),
                       Icon(
                         AntIcons.search_outline,
-                        size: 25,
+                        size: 22,
+                        color: DarkGrey,
                       ),
-                      Text(model.name)
 
                     ],
                   ),

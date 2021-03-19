@@ -20,7 +20,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
               ),
               Padding(padding: EdgeInsets.only(top: 20.0)),
               Text(
-                "Splash Screen",
+                "Emoti",
                 style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white

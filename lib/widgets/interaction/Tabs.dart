@@ -44,17 +44,6 @@ class _HeaderTabsState extends State<HeaderTabs> {
                 ),
               ),
             ),
-            2: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: VerticalFontPadding,
-                  horizontal: HorizontalFontPadding),
-              child: Text(
-                "Profile",
-                style: TextStyle(
-                  fontSize: FontSize,
-                ),
-              ),
-            ),
           },
           onValueChanged: (value) {
             setState(() {
