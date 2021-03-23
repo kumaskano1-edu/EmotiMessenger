@@ -11,7 +11,7 @@ class _CustomBackButtonState extends State<CustomBackButton> {
     return Row(
       children: [
         BackButton(),
-        Text("Back")
+        Text("Back", style: TextStyle(fontSize: 20),)
       ],
     );
   }
