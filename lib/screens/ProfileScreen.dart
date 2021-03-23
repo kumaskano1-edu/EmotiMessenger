@@ -1,6 +1,9 @@
+import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/state/User.dart';
+import 'package:messenger/widgets/buttons/Buttons.dart';
 import 'package:messenger/widgets/buttons/NavigatingButtons.dart';
+import 'package:messenger/widgets/decorations/ProfileAvatar.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -48,7 +51,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  Expanded(flex: 11,child: CircleAvatar()),
+                  Expanded(
+                    flex: 5,
+                      child:Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                        child: Stack(
+                          children: <Widget>[
+                              Container(
+                                width: double.infinity,
+                                  child: CircleAvatar()
+                              ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    AntIcons.edit_outline,
+                                  ),
+                                ),
+                            )
+                            )],
+                        ),
+                      )
+                      ),
+                  Expanded(flex: 6, child: Text("Juna"))
                 ],
               )
             ),

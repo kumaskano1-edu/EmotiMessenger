@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               model: userModel,
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
-                initialRoute: '/login',
+                initialRoute: '/profile',
                 home: Dashboard(),
                 theme: ThemeData(
                     primaryColor: Blue,
