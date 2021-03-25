@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+//spacing units
 
+double spacingUnit = 10;
+
+//colors
 const Black = Color(0xFF263645);
-const White = Color(0xFFF7F7F9);
+const White = Color(0xFFfdfbfc);
 const Grey = Color(0xFFEBEBEB);
 const DarkGrey = Color(0xFFA9A9A9);
 const LightBlue = Color(0xFFAED5F8);

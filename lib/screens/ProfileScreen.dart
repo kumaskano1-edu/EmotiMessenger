@@ -1,5 +1,6 @@
 import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:messenger/constants.dart';
 import 'package:messenger/state/User.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
 import 'package:messenger/widgets/buttons/NavigatingButtons.dart';
@@ -50,104 +51,84 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   Expanded(
                     flex: 11,
-                    child: GestureDetector(
-                      onTap: () {
-                        FocusScope.of(context).unfocus();
-                      },
-                      child: ListView(
-                        children: [
-                          SizedBox(
-                            height: 15,
-                          ),
-                          Center(
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: 130,
-                                  height: 130,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 4,
-                                          color: Theme.of(context).scaffoldBackgroundColor),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            spreadRadius: 2,
-                                            blurRadius: 10,
-                                            color: Colors.black.withOpacity(0.1),
-                                            offset: Offset(0, 10))
-                                      ],
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                            "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                                          ))),
-                                ),
-                                Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: Container(
-                                      height: 40,
-                                      width: 40,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          width: 4,
-                                          color: Theme.of(context).scaffoldBackgroundColor,
-                                        ),
-                                        color: Colors.green,
-                                      ),
-                                      child: Icon(
-                                        Icons.edit,
-                                        color: Colors.white,
-                                      ),
-                                    )),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 35,
-                          ),
-                          buildTextField("Full Name", "Dor Alex", false),
-                          buildTextField("E-mail", "alexd@gmail.com", false),
-                          buildTextField("Password", "********", true),
-                          buildTextField("Location", "TLV, Israel", false),
-                          SizedBox(
-                            height: 35,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: ListView(
+                      children: [
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Center(
+                          child: Stack(
                             children: [
-                              OutlineButton(
-                                padding: EdgeInsets.symmetric(horizontal: 50),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                onPressed: () {},
-                                child: Text("CANCEL",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        letterSpacing: 2.2,
-                                        color: Colors.black)),
+                              Container(
+                                width: 130,
+                                height: 130,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 4,
+                                        color: Grey
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          spreadRadius: 2,
+                                          blurRadius: 10,
+                                          color: Colors.black.withOpacity(0.1),
+                                          offset: Offset(0, 1))
+                                    ],
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                          "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
+                                        ))),
                               ),
-                              RaisedButton(
-                                onPressed: () {},
-                                color: Colors.green,
-                                padding: EdgeInsets.symmetric(horizontal: 50),
-                                elevation: 2,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
-                                child: Text(
-                                  "SAVE",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      letterSpacing: 2.2,
-                                      color: Colors.white),
-                                ),
-                              )
+                              Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        width: 4,
+                                        color: Blue,
+                                      ),
+                                      color: Blue,
+                                    ),
+                                    child: Icon(
+                                      Icons.edit,
+                                      color: Colors.white,
+                                    ),
+                                  )),
+
                             ],
-                          )
-                        ],
-                      ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: spacingUnit),//THE name and email section
+                          child: Column(
+                            children: [
+                              Text("Kurmanbek Karaev", style: TextStyle(fontSize: 25),),
+                              Text("kumakaraev01@gmail.com", style: TextStyle(fontWeight: FontWeight.w300),),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 80),
+                        ),
+                        //THOSE OPTION BUTTONS
+                        Container(
+                          padding: EdgeInsets.only(top: spacingUnit * 2),
+                          child: Column(
+                            children: [
+                              ProfileListItem(icon: AntIcons.profile_outline, text: "Account"),
+                              ProfileListItem(icon: AntIcons.question_circle_outline, text: "Help & Support"),
+                              ProfileListItem(icon: AntIcons.setting_outline, text: "Settings"),
+                              ProfileListItem(icon: AntIcons.logout_outline, text: "Logout")
+                            ],
+                          ),
+                        )
+                      ],
                     )
                   )],
               )
@@ -155,30 +136,56 @@ class _ProfileScreenState extends State<ProfileScreen> {
           );
         }
     );
+  }
 }
-}
-Widget buildTextField(
-    String labelText, String placeholder, bool isPasswordTextField) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 35.0),
-    child: TextField(
-      decoration: InputDecoration(
-          suffixIcon: isPasswordTextField
-              ? IconButton(
-            icon: Icon(
-              Icons.remove_red_eye,
-              color: Colors.grey,
+
+class ProfileListItem extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final bool hasNavigation;
+
+  const ProfileListItem({
+    Key key,
+    this.icon,
+    this.text,
+    this.hasNavigation = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: spacingUnit * 5.5,
+      margin: EdgeInsets.symmetric(
+        horizontal: spacingUnit * 2.5,
+      ).copyWith(
+        bottom: spacingUnit * 1.5,
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: spacingUnit * 2,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(spacingUnit * 3),
+        color: Grey,
+      ),
+      child: Row(
+        children: <Widget>[
+          Icon(
+            this.icon,
+            size: spacingUnit * 2.5,
+          ),
+          SizedBox(width: spacingUnit * 1.5),
+          Text(
+            this.text,
+            style: TextStyle(fontWeight: FontWeight.w500)
+          ),
+          Spacer(),
+          if (this.hasNavigation)
+            Icon(
+              AntIcons.right_outline,
+              size: spacingUnit * 2.5,
             ),
-          )
-              : null,
-          contentPadding: EdgeInsets.only(bottom: 3),
-          labelText: labelText,
-          floatingLabelBehavior: FloatingLabelBehavior.always,
-          hintText: placeholder,
-          hintStyle: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          )),
-    ),
-  );}
+        ],
+      ),
+    );
+  }
+}
