@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
+import 'package:messenger/screens/ChatScreen.dart';
 import 'package:messenger/screens/ProfileScreen.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:messenger/screens/Dashboard.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
               model: userModel,
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
-                initialRoute: '/profile',
+                initialRoute: '/chatscreen',
                 home: Dashboard(),
                 theme: ThemeData(
                     primaryColor: Blue,
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
                   //SCREENs
                   '/dashboard': (context) => Dashboard(),
                   '/profile': (context) => ProfileScreen(),
+                  '/chatscreen': (context) => ChatScreen()
                 },
               ),
             );
