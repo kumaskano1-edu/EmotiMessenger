@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 enum ChatMessageType { text, audio, image, video }
 enum MessageStatus { not_sent, not_view, viewed }
 
-class ChatMessage {
+class ChatMessageModel {
   final String text;
   final ChatMessageType messageType;
   final MessageStatus messageStatus;
   final bool isSender;
 
-  ChatMessage({
+  ChatMessageModel({
     this.text,
     @required this.messageType,
     @required this.messageStatus,
@@ -18,43 +18,67 @@ class ChatMessage {
 }
 
 List demeChatMessages = [
-  ChatMessage(
+  ChatMessageModel(
     text: "Hi Sajol,",
     messageType: ChatMessageType.text,
     messageStatus: MessageStatus.viewed,
     isSender: false,
   ),
-  ChatMessage(
+  ChatMessageModel(
     text: "Hello, How are you?",
     messageType: ChatMessageType.text,
     messageStatus: MessageStatus.viewed,
     isSender: true,
   ),
-  ChatMessage(
-    text: "",
-    messageType: ChatMessageType.audio,
+  ChatMessageModel(
+    text: "Hello, How are you?",
+    messageType: ChatMessageType.text,
     messageStatus: MessageStatus.viewed,
-    isSender: false,
+    isSender: true,
   ),
-  ChatMessage(
+  ChatMessageModel(
+    text: "Hello, How are you?",
+    messageType: ChatMessageType.text,
+    messageStatus: MessageStatus.viewed,
+    isSender: true,
+  ),
+  ChatMessageModel(
+    text: "Hello, How are you?",
+    messageType: ChatMessageType.text,
+    messageStatus: MessageStatus.viewed,
+    isSender: true,
+  ),
+  ChatMessageModel(
+    text: "Hello, How are you?",
+    messageType: ChatMessageType.text,
+    messageStatus: MessageStatus.viewed,
+    isSender: true,
+  ),
+  ChatMessageModel(
+    text: "Hello, How are you?",
+    messageType: ChatMessageType.text,
+    messageStatus: MessageStatus.viewed,
+    isSender: true,
+  ),
+  ChatMessageModel(
     text: "",
     messageType: ChatMessageType.video,
     messageStatus: MessageStatus.viewed,
     isSender: true,
   ),
-  ChatMessage(
+  ChatMessageModel(
     text: "Error happend",
     messageType: ChatMessageType.text,
     messageStatus: MessageStatus.not_sent,
     isSender: true,
   ),
-  ChatMessage(
+  ChatMessageModel(
     text: "This looks great man!!",
     messageType: ChatMessageType.text,
     messageStatus: MessageStatus.viewed,
     isSender: false,
   ),
-  ChatMessage(
+  ChatMessageModel(
     text: "Glad you like it",
     messageType: ChatMessageType.text,
     messageStatus: MessageStatus.not_view,

@@ -1,10 +1,12 @@
 import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
+import 'package:messenger/models/MessageModel.dart';
 import 'package:messenger/state/User.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
 import 'package:messenger/widgets/buttons/NavigatingButtons.dart';
 import 'package:messenger/widgets/decorations/ProfileAvatar.dart';
+import 'package:messenger/widgets/interaction/ChatMessage.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -40,7 +42,16 @@ class _ChatScreenState extends State<ChatScreen> {
                   padding: EdgeInsets.only(bottom: spacingUnit),
                   child: Column(
                     children: [
-                      Spacer(),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: spacingUnit),
+                          child: ListView.builder(
+                            itemCount: demeChatMessages.length,
+                            itemBuilder: (context, index) =>
+                                ChatMessage(message: demeChatMessages[index])
+                          ),
+                        ),
+                      ),
                       Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: spacingUnit,
