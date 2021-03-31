@@ -16,10 +16,10 @@ Future<User> SignUpWithCredentials(String name, String email, String password) a
     User user;
     await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password)
     .then((result) { user = result.user;});
-
     await user.updateProfile(displayName: name);
     await user.reload();
-    await FirebaseApi.saveUsertoDB(user);
+    user = FirebaseAuth.instance.currentUser;
+    FirebaseApi.saveUsertoDB(user);
     return user;
   } on FirebaseAuthException catch(e) {
     throw Exception(e.code);
