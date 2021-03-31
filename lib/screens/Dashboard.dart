@@ -67,7 +67,7 @@ class _DashboardState extends State<Dashboard> {
                 Container(
                   child: Column(
                     children: [
-                        ChatTile(ContactAvatar: "K", ContactName: "Kurmanbek",
+                      ChatTile(ContactAvatar: "K", ContactName: "Kurmanbek",
                           LastMessage: "Hey how are you doing", TimeRecieved: "1:00AM",),
                       ChatTile(ContactAvatar: "MD", ContactName: "Kurmanbek",
                         LastMessage: "wHATSUPP!!!", TimeRecieved: "1:00AM",),

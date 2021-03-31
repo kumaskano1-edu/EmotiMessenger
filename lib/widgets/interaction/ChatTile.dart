@@ -14,21 +14,24 @@ class _ChatTileState extends State<ChatTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: ListTile(
-        leading: CircleAvatar(
-          child: Text("K"),
-        ),
-        title: Text(
-          "Kurmanbek Karaev"
-        ),
-        subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              "Hello there"
-            ), Text(""
-                "5:00 PM")
-          ],
+      child: GestureDetector(
+        onTap: () => Navigator.pushNamed(context, "/chatscreen"),
+        child: ListTile(
+          leading: CircleAvatar(
+            child: Text("K"),
+          ),
+          title: Text(
+            "Kurmanbek Karaev"
+          ),
+          subtitle: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                "Hello there"
+              ), Text(""
+                  "5:00 PM")
+            ],
+          ),
         ),
       ),
     );

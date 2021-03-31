@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
               model: userModel,
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
-                initialRoute: '/chatscreen',
+                initialRoute: '/profile',
                 home: Dashboard(),
                 theme: ThemeData(
                     primaryColor: Blue,

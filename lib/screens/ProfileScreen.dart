@@ -18,120 +18,119 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<UserModel>(
         builder: (context, child, model) {
-          return Scaffold(
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            height: double.infinity,
-                              child: Center(child: CustomBackButton()),
+          return DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text("Profile")
+              ),
+              body: SafeArea(
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 11,
+                      child: ListView(
+                        children: [
+                          SizedBox(
+                            height: spacingUnit * 3,
                           ),
-                        ),
-                        Expanded(
-                          flex: 6,
-                          child: Container(
-                            height: double.infinity,
-                            child: Center(child: Text("Profile", style: TextStyle(fontSize: 20),)),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            height: double.infinity,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 11,
-                    child: ListView(
-                      children: [
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Center(
-                          child: Stack(
-                            children: [
-                              Container(
-                                width: 130,
-                                height: 130,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        width: 4,
-                                        color: Grey
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          spreadRadius: 2,
-                                          blurRadius: 10,
-                                          color: Colors.black.withOpacity(0.1),
-                                          offset: Offset(0, 1))
-                                    ],
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                          "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                                        ))),
-                              ),
-                              Positioned(
-                                  bottom: 0,
-                                  right: 0,
-                                  child: Container(
-                                    height: 40,
-                                    width: 40,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
+                          Center(
+                            child: Stack(
+                              children: [
+                                Container(
+                                  width: 130,
+                                  height: 130,
+                                  decoration: BoxDecoration(
                                       border: Border.all(
-                                        width: 4,
+                                          width: 5,
+                                          color: Grey
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            spreadRadius: 3,
+                                            blurRadius: 10,
+                                            color: Colors.black.withOpacity(0.1),
+                                            offset: Offset(0, 1))
+                                      ],
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                           'google.com',
+                                          ))),
+                                ),
+                                Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: Container(
+                                      height: 40,
+                                      width: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          width: 4,
+                                          color: Blue,
+                                        ),
                                         color: Blue,
                                       ),
-                                      color: Blue,
-                                    ),
-                                    child: Icon(
-                                      Icons.edit,
-                                      color: Colors.white,
-                                    ),
-                                  )),
+                                      child: Icon(
+                                        Icons.edit,
+                                        color: Colors.white,
+                                      ),
+                                    )),
 
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: spacingUnit),//THE name and email section
-                          child: Column(
-                            children: [
-                              Text("Kurmanbek Karaev", style: TextStyle(fontSize: 25),),
-                              Text("kumakaraev01@gmail.com", style: TextStyle(fontWeight: FontWeight.w300),),
-                            ],
+                          Container(
+                            child: Column(
+                              children: [
+                                Container(padding: EdgeInsets.symmetric(vertical: spacingUnit / 2),
+                                    child: Text("Kuma Karaev", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500))),
+                                Text("kumakaraev01@gmail.com", style: TextStyle(fontWeight: FontWeight.w300, fontSize: 15),),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 80),
-                        ),
-                        //THOSE OPTION BUTTONS
-                        Container(
-                          padding: EdgeInsets.only(top: spacingUnit * 2),
-                          child: Column(
-                            children: [
-                              ProfileListItem(icon: AntIcons.profile_outline, text: "Account"),
-                              ProfileListItem(icon: AntIcons.question_circle_outline, text: "Help & Support"),
-                              ProfileListItem(icon: AntIcons.setting_outline, text: "Settings"),
-                              ProfileListItem(icon: AntIcons.logout_outline, text: "Logout")
-                            ],
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 80),
                           ),
-                        )
-                      ],
-                    )
-                  )],
-              )
+                          //THOSE OPTION BUTTONS
+                          Container(
+                            padding: EdgeInsets.only(top: spacingUnit * 3),
+                            child: Center(
+                              child: TabBar(
+                                  isScrollable: true,
+                                  labelColor: Blue,
+                                  unselectedLabelColor: Colors.black.withOpacity(0.3),
+                                  indicatorColor: Blue,
+                                  tabs: [
+                                    Container(
+                                      padding: EdgeInsets.symmetric(horizontal: spacingUnit * 3),
+                                      child: Tab(
+                                        child: Text('About', style: TextStyle(fontSize: 20)),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(horizontal: spacingUnit * 3),
+                                      child: Tab(
+                                        child: Text('Account', style: TextStyle(fontSize: 20)),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(horizontal: spacingUnit * 3),
+                                      child: Tab(
+                                        child: Text('Setting', style: TextStyle(fontSize: 20)),
+                                      ),
+                                    ),
+                                  ],),
+                            ),
+                          )
+                        ],
+                      )
+                    )],
+                )
+              ),
             ),
           );
         }
