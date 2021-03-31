@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:messenger/provider/FirebaseApi.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -18,6 +19,7 @@ Future<User> SignUpWithCredentials(String name, String email, String password) a
 
     await user.updateProfile(displayName: name);
     await user.reload();
+    await FirebaseApi.saveUsertoDB(user);
     return user;
   } on FirebaseAuthException catch(e) {
     throw Exception(e.code);
@@ -54,6 +56,7 @@ Future<User> signInWithGoogle() async {
   final UserCredential authResult = await _auth.signInWithCredential(
       credential);
   final User user = authResult.user;
+  await FirebaseApi.saveUsertoDB(user);
   return user;
 }
 
