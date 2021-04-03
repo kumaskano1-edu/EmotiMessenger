@@ -2,6 +2,7 @@ import 'package:ant_icons/ant_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
 import 'package:messenger/provider/Authentication.dart';
+import 'package:messenger/provider/FirebaseApi.dart';
 import 'package:messenger/state/User.dart';
 import 'package:messenger/widgets/buttons/Buttons.dart';
 import 'package:messenger/widgets/interaction/ChatTile.dart';
@@ -17,6 +18,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<UserModel>(
       builder: (context, child, model) {
+        List<String> sessionIds = FirebaseApi.getChatingTiles(model.studentID);
         return Scaffold(
         floatingActionButton: Container(
           height: 120.0,
@@ -67,14 +69,7 @@ class _DashboardState extends State<Dashboard> {
                 Container(
                   child: Column(
                     children: [
-                      ChatTile(ContactAvatar: "K", ContactName: "Kurmanbek",
-                          LastMessage: "Hey how are you doing", TimeRecieved: "1:00AM",),
-                      ChatTile(ContactAvatar: "MD", ContactName: "Kurmanbek",
-                        LastMessage: "wHATSUPP!!!", TimeRecieved: "1:00AM",),
-                      ChatTile(ContactAvatar: "KU", ContactName: "Kurmanbek",
-                        LastMessage: ":)", TimeRecieved: "1:00AM",),
-                      ChatTile(ContactAvatar: "SY", ContactName: "Kurmanbek",
-                        LastMessage: "Love you", TimeRecieved: "1:00AM",),
+
                     ],
                   ),
                 ),

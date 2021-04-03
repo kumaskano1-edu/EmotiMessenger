@@ -56,7 +56,10 @@ Future<User> signInWithGoogle() async {
   final UserCredential authResult = await _auth.signInWithCredential(
       credential);
   final User user = authResult.user;
-  await FirebaseApi.saveUsertoDB(user);
+  bool exists = await FirebaseApi.checkIfUserExists(user.uid);
+  if(!exists) {
+    await FirebaseApi.saveUsertoDB(user);
+  }
   return user;
 }
 
