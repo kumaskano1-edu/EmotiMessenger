@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<UserModel>(
       builder: (context, child, model) {
-        List<String> sessionIds = FirebaseApi.getChatingTiles(model.studentID);
+        Future<List<String>> sessionIds = FirebaseApi.getChatingTiles(model.studentID);
         return Scaffold(
         floatingActionButton: Container(
           height: 120.0,
