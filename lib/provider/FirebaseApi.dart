@@ -34,21 +34,17 @@ class FirebaseApi {
         .then((response) => print("User Created!"))
         .catchError((onError) => print(onError.toString()));
   }
-  static Future<List<String>> getChatingTiles(String currentUserId) async {
+  static Future<List<String>> getSessionsIdsFromUser(String currentUserId) async {
     CollectionReference users = firestore.collection("users");
-    CollectionReference sessions = firestore.collection('sessions');
     List<dynamic> userSesssionsFromDb = await users.doc(currentUserId).get().then((value) => value.data()['sessions']);
     List<String> returnableUserSessions = userSesssionsFromDb.map((s) => s as String).toList();
-
-    //at this point, we have sessions strings from db
-    for(String sessionIdString in returnableUserSessions) {
-      print(sessionIdString);
-      print(await sessions.doc(sessionIdString).get().then((value) => value.data()));
-      //TODO insted of print, create a chat tile and assign its properties to the info recieved and output in dashboard
-    }
-
     return returnableUserSessions;
   }
-
+  static Future<Map<String, dynamic>> getSessionObjectsWithID(String sessionId) async {
+    CollectionReference sessions = firestore.collection('sessions');
+    Map<String, dynamic> sessionObjectsMap = await sessions.doc(sessionId).get().then((value) => value.data());
+    print(sessionObjectsMap);
+    return sessionObjectsMap;
+  }
 
 }

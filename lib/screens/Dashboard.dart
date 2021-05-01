@@ -1,6 +1,8 @@
 import 'package:ant_icons/ant_icons.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/constants.dart';
+import 'package:messenger/models/SessionModel.dart';
 import 'package:messenger/provider/Authentication.dart';
 import 'package:messenger/provider/FirebaseApi.dart';
 import 'package:messenger/state/User.dart';
@@ -18,7 +20,9 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<UserModel>(
       builder: (context, child, model) {
-        Future<List<String>> sessionIds = FirebaseApi.getChatingTiles(model.studentID);
+        Future<List<String>> sessionIds = FirebaseApi.getSessionsIdsFromUser(model.studentID);
+        Future<Map<String, dynamic>> map = FirebaseApi.getSessionObjectsWithID("zHbIgcwB9lcitbf5SggTsM1iYOm1PWB3D3lbtrOfsmU8wfxzCmKmPx13");
+        SessionModel sessionMes = SessionModel.beta(map);
         return Scaffold(
         floatingActionButton: Container(
           height: 120.0,
