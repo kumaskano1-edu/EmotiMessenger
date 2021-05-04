@@ -22,7 +22,6 @@ class _DashboardState extends State<Dashboard> {
       builder: (context, child, model) {
         Future<List<String>> sessionIds = FirebaseApi.getSessionsIdsFromUser(model.studentID);
         Future<Map<String, dynamic>> map = FirebaseApi.getSessionObjectsWithID("zHbIgcwB9lcitbf5SggTsM1iYOm1PWB3D3lbtrOfsmU8wfxzCmKmPx13");
-        SessionModel sessionMes = SessionModel.beta(map);
         return Scaffold(
         floatingActionButton: Container(
           height: 120.0,
@@ -73,7 +72,19 @@ class _DashboardState extends State<Dashboard> {
                 Container(
                   child: Column(
                     children: [
+                      FutureBuilder<Map<String, dynamic>>(
+                        future: map,
+                        builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+                          if (snapshot.hasData) {
+                            SessionModel MessageTile = new SessionModel.withMap(snapshot.data);
+                            print(MessageTile.users);
+                            return Text("tHIS DUDE has Data");
+                          } else {
+                            return CircularProgressIndicator();
+                          }
+                        }
 
+                      )
                     ],
                   ),
                 ),

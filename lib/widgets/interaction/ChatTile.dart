@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+//TODO Generate the ChatTile from the SessionModel that has all attributes like last_messages and etc
 class ChatTile extends StatefulWidget {
   String ContactName;
   String ContactAvatar;

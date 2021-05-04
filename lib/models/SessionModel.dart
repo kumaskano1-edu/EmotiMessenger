@@ -7,20 +7,37 @@ class SessionModel {
     this.users,
     this.lastUpdated,
   });
-
+  SessionModel.beta() {
+    this.messages = [];
+    this.users = [];
+    this.name = " ";
+    this.lastUpdated = null;
+  }
+  SessionModel.withMap(Map<String, dynamic> sessionMap) {
+    this.name = sessionMap['name'].toString();
+    this.users = ChangeDynamicListToString(sessionMap['users']);
+    this.lastUpdated = sessionMap['last_updated'];
+    this.messages = ChangeDynamicListToString(sessionMap['messages']);
+    //TODO
+  }
 
   List<String> messages;
   String name;
   List<String> users;
   Timestamp lastUpdated;
 
-  void GenerateModelFromSessionMap(){
-
-  }
+  // ignore: non_constant_identifier_names
   Map<String, dynamic> toJson() => {
     "messages": List<dynamic>.from(messages.map((x) => x)),
     "name": name,
     "users": List<dynamic>.from(users.map((x) => x)),
     "last_updated": lastUpdated,
   };
+  static List<String> ChangeDynamicListToString(List<dynamic> dynamicList) {
+    List<String> stringList = new List<String>();
+    for(dynamic dynElem in dynamicList) {
+      stringList.add(dynElem.toString());
+    }
+    return stringList;
+  }
 }
