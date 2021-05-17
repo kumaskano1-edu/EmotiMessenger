@@ -4,11 +4,11 @@
   <br>
   <a href=""><img src="https://user-images.githubusercontent.com/57332034/118433038-f069aa00-b68e-11eb-9ce1-c2eb58d9267e.png" alt="Todo" width="200"></a>
   <br>
-  Emoti - Real Time Messenger
+  Real Time Messenger
   <br>
 </h1>
 
-<h4 align="center">A minimal Todo mobile app made using <a href="https://flutter.dev" target="_blank">Flutter</a>.</h4>
+<h4 align="center">A template/prototype of the messagin application written in <a href="https://flutter.dev" target="_blank">Flutter</a>.</h4>
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
