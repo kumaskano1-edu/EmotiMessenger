@@ -8,7 +8,7 @@
   <br>
 </h1>
 
-<h4 align="center">A template/prototype of the messagin application written in <a href="https://flutter.dev" target="_blank">Flutter</a>.</h4>
+<h4 align="center">A functional messaging application written in <a href="https://flutter.dev" target="_blank">Flutter</a>.</h4>
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
