@@ -56,5 +56,4 @@ MIT
 
 ---
 
-> GitHub [@sabinbajracharya](https://github.com/sabinbajracharya) &nbsp;&middot;&nbsp;
-> Instagram [@er_sabin](https://www.instagram.com/er_sabin/)
+> GitHub [@kumaskano1-edu](https://github.com/kumaskano1-edu) &nbsp;&middot;&nbsp;
