@@ -18,10 +18,10 @@
 </p>
 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/57332034/118433302-88679380-b68f-11eb-9e23-f77c0b05a67c.png" width="250" />
-  <img src="https://user-images.githubusercontent.com/57332034/118432849-881ac880-b68e-11eb-84df-8a24646f3ded.png" width="250" />
-  <img src="https://user-images.githubusercontent.com/57332034/118432847-86e99b80-b68e-11eb-8195-185ac845ea32.png" width="250" />
-  <img src="https://user-images.githubusercontent.com/57332034/118432848-87823200-b68e-11eb-8df5-a0dd39770f21.png" width="250" /> 
+  <img src="https://user-images.githubusercontent.com/57332034/118433302-88679380-b68f-11eb-9e23-f77c0b05a67c.png" width="230" />
+  <img src="https://user-images.githubusercontent.com/57332034/118432849-881ac880-b68e-11eb-84df-8a24646f3ded.png" width="230" />
+  <img src="https://user-images.githubusercontent.com/57332034/118432847-86e99b80-b68e-11eb-8195-185ac845ea32.png" width="230" />
+  <img src="https://user-images.githubusercontent.com/57332034/118432848-87823200-b68e-11eb-8df5-a0dd39770f21.png" width="230" /> 
 </p>
 
 ## Key Features
