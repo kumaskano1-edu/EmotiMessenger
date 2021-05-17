@@ -2,7 +2,8 @@
 
 <h1 align="center">
   <br>
-  <a href=""><img src="https://lh3.googleusercontent.com/WoCgEV-IoxkLTozlfqpxKr_uRTQ7jPFEetLWLTgIVTB4YcrPFpj4LpD9q4XD7Ij2Hos=s360" alt="Todo" width="200"></a>
+  <a href=""><img src="![Screenshot 2021-05-16 211904](https://user-images.githubusercontent.com/57332034/118432849-881ac880-b68e-11eb-84df-8a24646f3ded.png)
+" alt="Todo" width="200"></a>
   <br>
   Emoti - Real Time Messenger
   <br>
