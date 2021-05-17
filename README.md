@@ -1,5 +1,3 @@
-[![Codemagic build status](https://api.codemagic.io/apps/5d0f190099fdb70008475b03/5d0f190099fdb70008475b02/status_badge.svg)](https://codemagic.io/apps/5d0f190099fdb70008475b03/5d0f190099fdb70008475b02/latest_build)
-
 <h1 align="center">
   <br>
   <a href=""><img src="https://user-images.githubusercontent.com/57332034/118433038-f069aa00-b68e-11eb-9ce1-c2eb58d9267e.png" alt="Todo" width="200"></a>
