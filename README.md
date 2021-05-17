@@ -18,9 +18,9 @@
 </p>
 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/57332034/118432847-86e99b80-b68e-11eb-8195-185ac845ea32.png" width="333" />
-  <img src="https://user-images.githubusercontent.com/57332034/118432848-87823200-b68e-11eb-8df5-a0dd39770f21.png" width="333" /> 
-  <img src="https://user-images.githubusercontent.com/57332034/118432849-881ac880-b68e-11eb-84df-8a24646f3ded.pngg" width="333" />
+  <img src="https://user-images.githubusercontent.com/57332034/118432847-86e99b80-b68e-11eb-8195-185ac845ea32.png" width="330" />
+  <img src="https://user-images.githubusercontent.com/57332034/118432848-87823200-b68e-11eb-8df5-a0dd39770f21.png" width="330" /> 
+  <img src="https://user-images.githubusercontent.com/57332034/118432849-881ac880-b68e-11eb-84df-8a24646f3ded.png" width="330" />
 </p>
 
 ## Key Features
