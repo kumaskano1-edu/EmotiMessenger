@@ -4,7 +4,7 @@
   <br>
   <a href=""><img src="https://lh3.googleusercontent.com/WoCgEV-IoxkLTozlfqpxKr_uRTQ7jPFEetLWLTgIVTB4YcrPFpj4LpD9q4XD7Ij2Hos=s360" alt="Todo" width="200"></a>
   <br>
-  Todo - Simple & Beautiful
+  Emoti - Real Time Messenger
   <br>
 </h1>
 
