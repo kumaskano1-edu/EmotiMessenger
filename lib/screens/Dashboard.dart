@@ -78,7 +78,7 @@ class _DashboardState extends State<Dashboard> {
                           if (snapshot.hasData) {
                             SessionModel MessageTile = new SessionModel.withMap(snapshot.data);
                             print(MessageTile.users);
-                            return Text("tHIS DUDE has Data");
+                            return ChatTile(MessageTile);
                           } else {
                             return CircularProgressIndicator();
                           }
@@ -88,14 +88,14 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                 ),
-                Container(
-                  child: PrimaryButton(text: "Logout", onPressed: () async {
-                    if(await signOut()) {
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-                    };
-                  },),
-                )
+                // Container(
+                //   child: PrimaryButton(text: "Logout", onPressed: () async {
+                //     if(await signOut()) {
+                //       Navigator.of(context)
+                //           .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
+                //     };
+                //   },),
+                // )
               ],
             ),
           ),
